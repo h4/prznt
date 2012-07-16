@@ -1,0 +1,177 @@
+html {
+    height: 100%;
+    }
+
+body {
+    position: relative;
+    font-family: "PT Sans Narrow", sans-serif;
+    font-size: 26px;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background: #eee;
+    color:#313139;
+    }
+h1,
+h2,
+h3 {
+    font-family: "PT Serif Caption", serif;
+    font-weight: normal;
+    }
+
+h1 {
+    font-size: 48px;
+    line-height: 1;
+    margin: 0;
+    }
+
+h2 {
+    font-size: 18px;
+    }
+
+h3 {
+    margin: 0;
+    }
+
+ul,
+ol {
+    margin-left: -1.5em;
+    }
+
+li {
+    margin-bottom: 1em;
+    }
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    }
+
+th {
+    text-align: left;
+    vertical-align: top;
+    }
+
+td {
+    padding: 1em;
+    vertical-align: top;
+    }
+
+thead {
+    border-bottom: solid 2px #999;
+    }
+
+thead th {
+    padding: .3em 1em;
+    }
+
+tbody th {
+    padding: 1em;
+    }
+
+tbody tr:nth-child(even) {
+    background: rgba(255, 255, 255, 0.8);
+    }
+
+.slide {
+    position: absolute;
+    top: 2em;
+    right: 2em;
+    bottom: 2em;
+    left: 2em;
+    padding: 4% 8%;
+    overflow: hidden;
+    background: #fefff2;
+    border-radius: 1em;
+    box-shadow: 0 0 2em #dadada;
+    z-index: 0;
+    visibility: hidden;
+    }
+    .slide:target {
+        visibility: visible;
+        }
+
+.pager {
+    position: absolute;
+    bottom: 4em;
+    right: 4em;
+    padding: 0 1em;
+    background: #ffebb7;
+    border-radius: 1em;
+    color: #999;
+    }
+    .pager span {
+        color: #666;
+        }
+
+.toc-box {
+    position: absolute;
+    top:0;
+    right: 0;
+    bottom: 0;
+    left:0;
+    height: 60%;
+    width: 30%;
+    margin: auto;
+    background: #FFF;
+    padding: 2em;
+    border: solid 1px #EEE;
+    border-radius: .7em;
+    overflow: auto;
+    }
+    .toc-box .closer {
+        position: absolute;
+        top: 1em;
+        right: 1em;
+        cursor: pointer;
+        }
+        .toc-box .closer:hover {
+            color: #6d98ff;
+            }
+    .toc-box-hidden {
+        left: -9999px;
+        }
+
+.toc li {
+    margin: 0;
+    color: #6d98ff;
+    cursor: pointer;
+    text-decoration: underline;
+    }
+    .toc li:hover {
+        color: #5767b9;
+        }
+
+.slide hgroup {
+    margin-bottom: 2em;
+    }
+
+.header-on-bottom hgroup {
+    position: absolute;
+    z-index: 1;
+    top:auto;
+    left: 0;
+    right: 0;
+    bottom: 2em;
+    padding: 1em 8%;
+    }
+
+.slide article {
+    }
+
+.image article {
+    position: absolute;
+    top:0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    }
+
+.image hgroup {
+    background: rgba(255, 255, 255, .5)
+    }
+
+.image img {
+    width: 100%;
+    }
+
