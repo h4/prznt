@@ -16,8 +16,7 @@ PRZNT.init = function () {
 
     for (var i=0, l=this.slides.length; i<l; i++) {
         $("<li></li>")
-        .text(PRZNT.slides.eq(i)
-        .attr('data-title'))
+        .text(PRZNT.slides[i].dataset.title)
         .click(function (e) {
             PRZNT.currentSlide = $(e.target).index();
             PRZNT.go();
