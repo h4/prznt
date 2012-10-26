@@ -145,7 +145,7 @@ PRZNT.prev = function() {
 };
 
 PRZNT.go = function() {
-    location.hash = '#' + this.slides.eq(this.currentSlide).attr('id');
+    location = location.pathname + '#' + this.slides.eq(this.currentSlide).attr('id');
 
     this.page_number.text(this.currentSlide + 1);
 };

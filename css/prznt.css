@@ -73,6 +73,11 @@ tbody tr:nth-child(even) {
     background: rgba(255, 255, 255, 0.8);
     }
 
+.slides {
+    position: relative;
+    height: 100%;
+    }
+
 .slide {
     position: absolute;
     top: 2em;
@@ -87,7 +92,7 @@ tbody tr:nth-child(even) {
     z-index: 0;
     visibility: hidden;
     }
-    .slide:target {
+    .slides .slide:target {
         visibility: visible;
         }
 
