@@ -1,6 +1,10 @@
 var PRZNT = {};
 
-PRZNT.init = function () {
+PRZNT.init = function (data) {
+    var $body = $('.slides');
+
+    data.forEach(this.parseSlide, $body);
+
     this.slides = $('.slide');
     this.currentSlide = 0;
     this.page_number = $('.page-number');
@@ -47,6 +51,81 @@ PRZNT.init = function () {
     this.go();
 };
 
+PRZNT.parseSlide = function(el, index, arr) {
+    var $slide = $('<slide class="slide" />'),
+        $header = $('<hgroup />'),
+        $body = $('<article />');
+
+    $slide
+        .attr("id", "slide_" + index)
+        .attr("data-title", el.title);
+
+    if (el.type) {
+        $slide.addClass(el.type);
+    }
+
+    $header.append("<h1>" + el.title + "</h1>");
+
+    if (el.subtitle) {
+        $header.append("<h2>" + el.subtitle + "</h2>");
+    }
+
+    $slide.append($header);
+
+    if (el.content) {
+        switch (el.content.type) {
+            case "image":
+                $body.append($('<img />').attr("src", el.content.value));
+
+                break;
+            case "table":
+                var $table = $("<table />"),
+                    thead,
+                    tbody;
+
+                thead = el.content.value.head
+                    .reduce(function (prev, el, index, arr) {
+                        return prev + "<th>" + el + "</th>";
+                    });
+
+                tbody = el.content.value.body
+                    .map(function(el){
+                        return el.reduce(function(prev, el, index, arr) {
+                            return prev + "<td>" + el + "</td>"
+                        })
+                    })
+                    .reduce(function(prev, el, index, arr) {
+                        return prev + "<tr>" + el + "</tr>";
+                    });
+
+                $table
+                    .append("<thead><tr>" + thead + "</tr></thead>")
+                    .append("<tbody>" + tbody + "</tbody>")
+                    .appendTo($body);
+
+                break;
+
+            case "list":
+                var $list = $("<ol />"),
+                    str;
+
+                $list.append(el.content.value
+                    .map(function(el) {
+                        return "<li>" + el + "</li>";
+                    })
+                    .reduce(function(prev, el, index, arr) {
+                        return prev + el;
+                    }))
+                    .appendTo($body);
+
+                break;
+        }
+        $slide.append($body);
+    }
+
+    this.append($slide);
+};
+
 PRZNT.next = function() {
     if(this.currentSlide === (this.slides.length - 1)) {
         return;
@@ -76,5 +155,9 @@ PRZNT.toggleTOC = function() {
 };
 
 $(function() {
-    PRZNT.init();
+    $.get('data.json', function(data){
+        PRZNT.init(data.slides);
+    });
+
+
 });
