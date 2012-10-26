@@ -1,57 +1,93 @@
-var PRZNT = {};
+function Prznt(data, options) {
+    var currentSlide = 0,
+        count = 0,
+        $slides = (options && options.slides) ? $(options.slides) : $('.slides'),
+        $currentPage = (options && options.currentPage) ? $(options.currentPage) : $('.pager .current'),
+        $counter = (options && options.counter) ? $(options.counter) : $('.pager .total'),
+        toc = (options && options.tocObj) ? options.tocObj : {
+                box: $('.toc-box'),
+                list: $('.toc'),
+                closer: $('.toc-box .closer')
+            },
+        init,
+        next,
+        prev,
+        go,
+        generateToc,
+        toggleTOC;
 
-PRZNT.init = function (data) {
-    var $body = $('.slides');
+    init = function(res) {
+        var self = this;
 
-    data.forEach(this.parseSlide, $body);
+        if(typeof res === 'undefined') {
+            $.get(data, function(res){
+                self.init(res.slides);
+            });
+        } else {
+            count = res.length;
+            $counter.text(count);
 
-    this.slides = $('.slide');
-    this.currentSlide = 0;
-    this.page_number = $('.page-number');
-    this.toc = {
-        box: $('.toc-box'),
-        list: $('.toc'),
-        closer: $('.toc-box .closer')
+            res.forEach(parseSlide, $slides);
+            res.forEach(generateToc);
+
+            go();
+        }
+
+        return self;
     };
 
-    $('.pages-count').text(this.slides.length);
-
-    this.toc.closer.click(this.toggleTOC);
-
-    for (var i=0, l=this.slides.length; i<l; i++) {
+    generateToc = function (el, index, arr) {
         $("<li></li>")
-            .text(PRZNT.slides[i].dataset.title)
+            .text(el.title)
             .click(function (e) {
-                PRZNT.currentSlide = $(e.target).index();
-                PRZNT.go();
-                PRZNT.toggleTOC();
+                currentSlide = index;
+                go();
+                toggleTOC();
                 return false;
             })
-            .appendTo(this.toc.list);
-    }
+            .appendTo(toc.list);
+    };
 
-    $(document).keyup(function(e) {
-        switch (e.keyCode) {
-            case 39:
-            case 40:
-                PRZNT.next();
-                break;
+    toggleTOC = function() {
+        toc.box.toggleClass('toc-box-hidden');
+        return false;
+    };
 
-            case 37:
-            case 38:
-                PRZNT.prev();
-                break;
-            case 32:
-            case 76:
-                PRZNT.toggleTOC();
-                break;
+    next = function() {
+        if(currentSlide === (count - 1)) {
+            return;
         }
-    });
 
-    this.go();
-};
+        currentSlide ++;
+        go();
+    };
 
-PRZNT.parseSlide = function(el, index, arr) {
+    prev = function() {
+        if(currentSlide === 0) {
+            return;
+        }
+
+        currentSlide --;
+        go();
+    };
+
+    go = function() {
+        location = location.pathname + '#' + $slides.children().eq(currentSlide).attr('id');
+
+        $currentPage.text(currentSlide + 1);
+    };
+
+    toc.closer.click(toggleTOC);
+
+    return {
+        init: init,
+        next: next,
+        prev: prev,
+        toggleTOC: toggleTOC
+    };
+}
+
+function parseSlide(el, index, arr) {
     var $slide = $('<slide class="slide" />'),
         $header = $('<hgroup />'),
         $body = $('<article />');
@@ -124,39 +160,27 @@ PRZNT.parseSlide = function(el, index, arr) {
     }
 
     this.append($slide);
-};
-
-PRZNT.next = function() {
-    if(this.currentSlide === (this.slides.length - 1)) {
-        return;
-    }
-
-    this.currentSlide ++;
-    this.go();
-};
-
-PRZNT.prev = function() {
-    if(this.currentSlide === 0) {
-        return;
-    }
-
-    this.currentSlide --;
-    this.go();
-};
-
-PRZNT.go = function() {
-    location = location.pathname + '#' + this.slides.eq(this.currentSlide).attr('id');
-
-    this.page_number.text(this.currentSlide + 1);
-};
-
-PRZNT.toggleTOC = function() {
-    PRZNT.toc.box.toggleClass('toc-box-hidden');
-};
+}
 
 $(function() {
-    $.get('data.json', function(data){
-        PRZNT.init(data.slides);
+    var prznt = new Prznt('data.json').init();
+
+    $(document).keyup(function(e) {
+        switch (e.keyCode) {
+            case 39:
+            case 40:
+                prznt.next();
+                break;
+
+            case 37:
+            case 38:
+                prznt.prev();
+                break;
+            case 32:
+            case 76:
+                prznt.toggleTOC();
+                break;
+        }
     });
 
 
