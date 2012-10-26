@@ -16,16 +16,15 @@ PRZNT.init = function () {
 
     for (var i=0, l=this.slides.length; i<l; i++) {
         $("<li></li>")
-        .text(PRZNT.slides[i].dataset.title)
-        .click(function (e) {
-            PRZNT.currentSlide = $(e.target).index();
-            PRZNT.go();
-            PRZNT.toggleTOC();
-            return false;
-        })
-        .appendTo(this.toc.list);
+            .text(PRZNT.slides[i].dataset.title)
+            .click(function (e) {
+                PRZNT.currentSlide = $(e.target).index();
+                PRZNT.go();
+                PRZNT.toggleTOC();
+                return false;
+            })
+            .appendTo(this.toc.list);
     }
-
 
     $(document).keyup(function(e) {
         switch (e.keyCode) {
