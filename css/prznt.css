@@ -12,8 +12,8 @@ body {
     height: 100%;
     margin: 0;
     padding: 0;
-    background: #eee;
-    color:#313139;
+    background: #000013;
+    color: #9797ae;
     }
 h1,
 h2,
@@ -24,12 +24,15 @@ h3 {
 
 h1 {
     font-size: 48px;
-    line-height: 1;
+    line-height: 0.7;
     margin: 0;
+    color: #c82418;
+    text-shadow: 0 0 4px #ffe28d;
     }
 
 h2 {
-    font-size: 18px;
+    font-size: 24px;
+    color: #ffe28d;
     }
 
 h3 {
@@ -48,6 +51,8 @@ li {
 table {
     width: 100%;
     border-collapse: collapse;
+    background: rgba(255, 255, 255, 0.8);
+    color:#313139;
     }
 
 th {
@@ -73,7 +78,7 @@ tbody th {
     }
 
 tbody tr:nth-child(even) {
-    background: rgba(255, 255, 255, 0.8);
+    background: rgba(255, 255, 255, 0.3);
     }
 
 .slides {
@@ -87,25 +92,36 @@ tbody tr:nth-child(even) {
     right: 2em;
     bottom: 2em;
     left: 2em;
-    padding: 4% 8%;
-    overflow: hidden;
-    background: #fefff2;
-    border-radius: 1em;
-    box-shadow: 0 0 2em #dadada;
     z-index: 0;
     visibility: hidden;
+    padding: 6% 8%;
+    overflow: hidden;
+    background: #091021;
+    border: solid 3px #22316e;
+    border-radius: 1em;
+    box-shadow: 0 0 3em #4a82da;
+    opacity: 0;
+    -webkit-transition: opacity .5s ease-in-out;
+    -moz-transition: opacity .5s ease-in-out;
+    -o-transition: opacity .5s ease-in-out;
+    transition: opacity .5s ease-in-out;
+    -webkit-transition-delay: 0.5s;
+    -moz-transition-delay: 0.5s;
+    -o-transition-delay: 0.5s;
+    transition-delay: 0.5s;
     }
     .slides .slide:target {
         visibility: visible;
+        opacity: 1;
         }
 
 .pager {
     position: absolute;
-    bottom: 4em;
-    right: 4em;
+    bottom: 3em;
+    right: 3em;
     padding: 0 1em;
-    background: #ffebb7;
-    border-radius: 1em;
+    border: solid 2px #ffebb7;
+    border-radius: .4em;
     color: #999;
     }
     .pager span {
@@ -114,18 +130,23 @@ tbody tr:nth-child(even) {
 
 .toc-box {
     position: absolute;
-    top:0;
+    top:30%;
     right: 0;
-    bottom: 0;
-    left:0;
-    height: 60%;
+    left:-10px;
     width: 30%;
-    margin: auto;
-    background: #FFF;
+    background: #000020;
     padding: 2em;
-    border: solid 1px #EEE;
-    border-radius: .7em;
+    border-radius: 0 .7em .7em 0;
+    box-shadow: inset 0 0 9px #eadd86;
     overflow: auto;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+    -webkit-transition-delay: 0.5s;
+    -moz-transition-delay: 0.5s;
+    -o-transition-delay: 0.5s;
+    transition-delay: 0.5s;
     }
     .toc-box .closer {
         position: absolute;
