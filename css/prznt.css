@@ -176,10 +176,25 @@ tbody tr:nth-child(even) {
     }
 
 .image hgroup {
+    position: absolute;
+    z-index: 1;
+    top:2em;
+    left: 0;
+    right: 0;
+    padding: 1em 8%;
     background: rgba(255, 255, 255, .5)
     }
 
 .image img {
+    position: absolute;
+    top:50%;
+    left:0;
     width: 100%;
+    height:auto;
+    -webkit-transform:translateY(-50%);
+    -moz-transform:translateY(-50%);
+    -ms-transform:translateY(-50%);
+    -o-transform:translateY(-50%);
+    transform:translateY(-50%);
     }
 
