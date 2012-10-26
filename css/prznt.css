@@ -198,3 +198,33 @@ tbody tr:nth-child(even) {
     transform:translateY(-50%);
     }
 
+.help {
+    position: absolute;
+    bottom: 4em;
+    left: 0;
+    right: 0;
+    width: 60%;
+    margin: 0 auto;
+    padding: 0 1em;
+    background: #FFF;
+    border-radius: .5em;
+    box-shadow: 0 0 20px #999;
+    }
+.help ul {
+    list-style: none;
+    }
+kbd {
+    display: inline-block;
+    min-width: 3ex;
+    min-height: 1.4em;
+    padding: 0 5px;
+    text-align: center;
+    text-shadow: 1px 1px 1px #FFF;
+    vertical-align: middle;
+    background: #CCC;
+    border-radius: 4px;
+    border: solid 2px;
+    border-color: #DDD #AAA #AAA #DDD;
+    box-shadow: inset 1px -2px 10px #FFF,
+            inset 0 -2px 5px #333
+    }

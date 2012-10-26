@@ -183,5 +183,7 @@ $(function() {
         }
     });
 
-
+    $('.help').delay(5000).fadeOut(function() {
+        $(this).remove();
+    });
 });
