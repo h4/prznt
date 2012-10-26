@@ -161,29 +161,3 @@ function parseSlide(el, index, arr) {
 
     this.append($slide);
 }
-
-$(function() {
-    var prznt = new Prznt('data.json').init();
-
-    $(document).keyup(function(e) {
-        switch (e.keyCode) {
-            case 39:
-            case 40:
-                prznt.next();
-                break;
-
-            case 37:
-            case 38:
-                prznt.prev();
-                break;
-            case 32:
-            case 76:
-                prznt.toggleTOC();
-                break;
-        }
-    });
-
-    $('.help').delay(5000).fadeOut(function() {
-        $(this).remove();
-    });
-});

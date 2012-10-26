@@ -29,7 +29,34 @@
     </ul>
 </div>
 
-<script type="text/javascript" src="http://yandex.st/jquery/1.7.2/jquery.min.js"></script>
-<script type="text/javascript" src="js/prznt.js"></script>
+<script src="http://yandex.st/jquery/1.7.2/jquery.min.js"></script>
+<script src="js/prznt.js"></script>
+<script>
+    $(function() {
+        var prznt = new Prznt('data.json').init();
+
+        $(document).keyup(function(e) {
+            switch (e.keyCode) {
+                case 39:
+                case 40:
+                    prznt.next();
+                    break;
+
+                case 37:
+                case 38:
+                    prznt.prev();
+                    break;
+                case 32:
+                case 76:
+                    prznt.toggleTOC();
+                    break;
+            }
+        });
+
+        $('.help').delay(5000).fadeOut(function() {
+            $(this).remove();
+        });
+    });
+</script>
 </body>
 </html>
