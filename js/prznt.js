@@ -6,12 +6,12 @@
         var currentSlide = 0,
             count = 0,
             $slides = (options && options.slides) ? $(options.slides) : $('.slides'),
-            $currentPage = (options && options.currentPage) ? $(options.currentPage) : $('.pager .current'),
-            $counter = (options && options.counter) ? $(options.counter) : $('.pager .total'),
+            $currentPage = (options && options.currentPage) ? $(options.currentPage) : $('.pager').find('.current'),
+            $counter = (options && options.counter) ? $(options.counter) : $('.pager').find('.total'),
             toc = (options && options.tocObj) ? options.tocObj : {
                 box: $('.toc-box'),
                 list: $('.toc'),
-                closer: $('.toc-box .closer')
+                closer: $('.toc-box').find('.closer')
             },
             init,
             next,
@@ -76,7 +76,7 @@
         };
 
         go = function() {
-            location = location.pathname + '#' + $slides.children().eq(currentSlide).attr('id');
+            root.location = location.pathname + '#' + $slides.children().eq(currentSlide).attr('id');
 
             $currentPage.text(currentSlide + 1);
         };
@@ -162,4 +162,4 @@
 
         this.append($slide);
     }
-}).call(this);
+}).call(window);
