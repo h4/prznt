@@ -2,6 +2,19 @@
     var root = this;
     var $ = root.jQuery;
 
+    /**
+     * Конструктор движка презентации
+     *
+     * @param {String} data Адрес ресурса, отдающего json с контентом презентации
+     * @param {{
+     *      slides: {String},
+     *      currentPage: {String},
+     *      counter: {String},
+     *      tocObj: {}
+     *  }} [options] Дополнительные параметры
+     * @constructor
+     * @return Prznt
+     */
     root.Prznt = function(data, options) {
         var currentSlide = 0,
             count = 0,
@@ -20,6 +33,13 @@
             generateToc,
             toggleTOC;
 
+        /**
+         * Инициализация презентации
+         *
+         * Вызов без параметров вызывает запрос за объектом со слайдами и передачу его в init() для построение html
+         * @param {*} [res] Объект, содержащий слайды презентации
+         * @return {*}
+         */
         init = function(res) {
             var self = this;
 
@@ -40,10 +60,17 @@
             return self;
         };
 
+        /**
+         * Построение оглавления на основе списка слайдов
+         *
+         * @param el
+         * @param index
+         * @param arr
+         */
         generateToc = function (el, index, arr) {
             $("<li></li>")
                 .text(el.title)
-                .click(function (e) {
+                .on('click', function (e) {
                     currentSlide = index;
                     go();
                     toggleTOC();
@@ -52,11 +79,19 @@
                 .appendTo(toc.list);
         };
 
+        /**
+         * Переключение видимости оглавления
+         *
+         * @return {boolean}
+         */
         toggleTOC = function() {
             toc.box.toggleClass('toc-box-hidden');
             return false;
         };
 
+        /**
+         * Переход к следующему слайду
+         */
         next = function() {
             if (currentSlide === (count - 1)) {
                 return;
@@ -66,6 +101,9 @@
             go();
         };
 
+        /**
+         * Переход к предыдущему слайду
+         */
         prev = function() {
             if (currentSlide === 0) {
                 return;
@@ -75,13 +113,16 @@
             go();
         };
 
+        /**
+         * Обновление счётчика и хеша страницы
+         */
         go = function() {
             root.location = location.pathname + '#' + $slides.children().eq(currentSlide).attr('id');
 
             $currentPage.text(currentSlide + 1);
         };
 
-        toc.closer.click(toggleTOC);
+        toc.closer.on('click', toggleTOC);
 
         this.init = init;
         this.next = next;
@@ -89,6 +130,13 @@
         this.toggleTOC = toggleTOC;
     };
 
+    /**
+     * Преобразование обекта слайда в html-дерево
+     *
+     * @param {Object} el
+     * @param {Number} index
+     * @param {Array} [arr]
+     */
     function parseSlide(el, index, arr) {
         var $slide = $('<slide class="slide" />'),
             $header = $('<hgroup />'),
