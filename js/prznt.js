@@ -23,7 +23,7 @@
         init = function(res) {
             var self = this;
 
-            if(typeof res === 'undefined') {
+            if (typeof res === 'undefined') {
                 $.get(data, function(res){
                     self.init(res.slides);
                 });
@@ -58,7 +58,7 @@
         };
 
         next = function() {
-            if(currentSlide === (count - 1)) {
+            if (currentSlide === (count - 1)) {
                 return;
             }
 
@@ -67,7 +67,7 @@
         };
 
         prev = function() {
-            if(currentSlide === 0) {
+            if (currentSlide === 0) {
                 return;
             }
 
@@ -144,8 +144,7 @@
                     break;
 
                 case "list":
-                    var $list = $("<ol />"),
-                        str;
+                    var $list = $("<ol />");
 
                     $list.append(el.content.value
                             .map(function(el) {
