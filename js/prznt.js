@@ -45,6 +45,7 @@
 
             if (typeof res === 'undefined') {
                 $.get(data, function(res){
+                    root.document.title = res.title;
                     self.init(res.slides);
                 });
             } else {
